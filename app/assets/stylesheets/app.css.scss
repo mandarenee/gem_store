@@ -1,0 +1,31 @@
+a {
+  background-color: white;
+  color: #CA326E;
+}
+
+a:hover,
+a:active {
+  background-color: #CA326E;
+  color: white;
+}
+
+button {
+  background-color: white;
+  color: #CA326E;
+}
+
+li {
+  list-style: none;
+}
+
+.price {
+  padding-right: 50px;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}

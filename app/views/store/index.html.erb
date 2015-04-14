@@ -1,0 +1,13 @@
+
+  <div ng-controller="StoreController as store">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="product in store.products">
+        <h3 product-title></h3>
+        <button class="pull-right price" ng-show="product.canPurchase"> Add to Cart </button>
+        <img ng-src="{{product.images[0].full}}"/>
+        <product-panels ng-init="tab = 1"></product-panels>
+      </li>
+    </ul>
+    {{store.product.name}}
+  </div>
+
