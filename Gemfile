@@ -20,12 +20,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'angular-rails-templates'
 gem 'bower-rails'
 gem 'responders', '~> 2.0'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'sqlite3'
+  gem 'pry-byebug'
 end
 
 group :production do

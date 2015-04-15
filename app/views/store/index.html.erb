@@ -1,12 +1,22 @@
   <div ng-controller="StoreController as store" ng-init="index()">
-    <form name="newProduct" ng-submit="create()">
-      <label for="name">
-        <input type="text" name="name" ng-model="product.name" />
-      </label>
-      <label for="price">
-        <input type="text" name="price" ng-model="product.price" />
-      </label>
-      <input type="submit"/>
+    <form name="newProduct" ng-submit="create()"><h4>New Product</h4><br>
+      <label for="name">Name:<br>
+        <input type="text" name="name" ng-model="product.name" >
+      </label><br>
+      <label for="price">Price:<br>
+        <input type="text" name="price" ng-model="product.price" >
+      </label><br>
+      <label for="description">Description:<br>
+        <input type="text" name="description" ng-model="product.description">
+      </label><br>
+      <label for="category">Category:<br>
+        <input type="text" name="category" ng-model="product.category">
+      </label><br>
+      <label for="canPurchase">For purchase?<br>
+        <input type="radio" name="canPurchase" ng-model="product.canPurchase" value="true" checked>Yes
+        <input type="radio" name="canPurchase" ng-model="product.canPurchase" value="false" checked>No
+      </label><br>
+      <input type="submit" value="Submit"/>
     </form>
 
     <ul class="list-group">
