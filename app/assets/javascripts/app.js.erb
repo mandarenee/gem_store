@@ -3,14 +3,32 @@
 (function() {
   var app = angular.module('store', ['store-products']);
 
-  app.controller('StoreController', [ '$http', function($http){
-    var store = this;
-    store.products = [ ];
+  app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }]);
 
-    // $http.get('/products.json').success(function(data){
-    //   store.products = data;
-    // });
-    this.products = gems;
+  app.controller('StoreController', [ '$http', '$scope', function($http, $scope){
+    $scope.products = [ ];
+    $scope.product = {};
+
+    $scope.index = function() {
+      $http.get('/products')
+        .success(function(data){
+          $scope.products = data;
+        })
+        .error(function(data, status) {
+          console.log(status);
+          $scope.errors.push(status);
+        });
+    };
+
+    $scope.create = function() {
+      $http.post('/products', $scope.product)
+        .success(function(data) {
+          $scope.products.unshift(data);
+          $scope.product = {};
+        });
+    };
   }]);
 
   app.controller("ReviewController", function() {

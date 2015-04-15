@@ -24,6 +24,5 @@ class CreatingProductsTest < ActionDispatch::IntegrationTest
       { 'Accept' => 'application/json',
         'Content-Type' => 'application/json' }
     assert_equal 422, response.status
-
   end
 end
