@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   # constraints subdomain: 'api' do
-    resources :categories
-    resources :products, only: :index
+    resources :categories, only: :index
+    resources :products
   # end
 
   # The priority is based upon order of creation: first created -> highest priority.
