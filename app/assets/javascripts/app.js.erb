@@ -12,9 +12,9 @@
     $scope.product = {};
 
     $scope.index = function() {
-      $http.get('/products')
+      $http.get('/api/products')
         .success(function(data){
-          $scope.products = data;
+          $scope.products = (data['products']);
         })
         .error(function(data, status) {
           console.log(status);
@@ -23,17 +23,18 @@
     };
 
     $scope.create = function() {
-      $http.post('/products', $scope.product)
+      $http.post('/api/products', $scope.product)
         .success(function(data) {
           $scope.products.unshift(data);
           $scope.product = {};
         });
     };
 
-    $scope.delete = function() {
-      $scope.product = $scope.products[:id];
-      console.log($scope.product);
-    }
+    // $scope.delete = function(:id) {
+    //   product_id = $scope.products[:id];
+    //   console.log($scope.product);
+    //   $http.delete('products/' + product_id)
+    // };
   }]);
 
   app.controller("ReviewController", function() {

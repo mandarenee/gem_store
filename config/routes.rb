@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  # constraints subdomain: 'api' do
+  namespace :api do
     resources :categories
     resources :products
-  # end
+  end
 
   root 'store#index'
 
