@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   # constraints subdomain: 'api' do
-    resources :categories, only: :index
+    resources :categories
     resources :products
   # end
 

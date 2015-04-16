@@ -6,7 +6,6 @@ class CreatingProductsTest < ActionDispatch::IntegrationTest
       name: 'Emerald',
       price: 345,
       description: 'super green',
-      category: 'gem',
       canPurchase: true,
       soldOut: false
       } }.to_json,
@@ -20,7 +19,6 @@ class CreatingProductsTest < ActionDispatch::IntegrationTest
     assert_equal 'Emerald', product[:name]
     assert_equal 345, product[:price].to_i
     assert_equal 'super green', product[:description]
-    assert_equal 'gem', product[:category]
     assert_equal true, product[:canPurchase]
     assert_equal false, product[:soldOut]
   end
