@@ -3,14 +3,53 @@
 (function() {
   var app = angular.module('store', ['store-products']);
 
-  app.controller('StoreController', [ '$http', function($http){
-    var store = this;
-    store.products = [ ];
+  app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+  }]);
 
-    // $http.get('/products.json').success(function(data){
-    //   store.products = data;
-    // });
-    this.products = gems;
+  app.controller('StoreController', [ '$http', '$scope', function($http, $scope){
+    $scope.products = [ ];
+    $scope.product = {};
+
+    $scope.index = function() {
+      $http.get('/api/products')
+        .success(function(data){
+          $scope.products = (data);
+        })
+        .error(function(data, status) {
+          console.log(status);
+          $scope.errors.push(status);
+        });
+    };
+
+    $scope.create = function() {
+      $http.post('/api/products', $scope.product)
+        .success(function(data) {
+          $scope.products.unshift(data);
+          $scope.product = {};
+        });
+    };
+
+    $scope.delete = function(product) {
+      $http.delete('/api/products/' + product.id)
+        .success(function() {
+          var index = $scope.products.indexOf(product);
+          $scope.products.splice(index, 1);
+        })
+        .error(function(data, status) {
+            console.log(status);
+            $scope.errors.push(status);
+        });
+    };
+
+
+
+    $scope.edit = function(product) {
+      $http.put('/api/products/' + product.id, product)
+        .success(function(data){
+          $scope.product = product;
+        });
+    }
   }]);
 
   app.controller("ReviewController", function() {
@@ -21,60 +60,4 @@
       this.review = {};
     };
   });
-
-  var gems = [
-    {
-      "name": "Dodecahedron",
-      "price": 2.95,
-      "description": "Description of dodecahedron here.",
-      "canPurchase": true,
-      "soldOut": false,
-      "images": [
-        {
-          "full": "<%= image_path('dodecahedron-01-full.jpg') %>",
-        }
-      ],
-      "reviews": [
-        {
-          "stars": 5,
-          "body": "I love this product!",
-          "author": "joe@thomas.com"
-        },
-        {
-          "stars": 1,
-          "body": "This product sucks",
-          "author": "tim@hater.com"
-        }
-      ]
-    },
-    {
-      "name": "Pentagonal Gem",
-      "price": 5.95,
-      "description": "Description of pentagonal here.",
-      "canPurchase": false,
-      "soldOut": false,
-      "images": [
-        {
-          "full": "<%= image_path('dodecahedron-02-full.jpg') %>",
-        }
-      ],
-      "reviews": [
-        {
-          "stars": 4,
-          "body": "Awesome product!",
-          "author": "bob@jones.com"
-        },
-        {
-          "stars": 3,
-          "body": "Well, it was okay!",
-          "author": "polly@undecided.com"
-        },
-        {
-          "stars": 2,
-          "body": "Nope nope nope!",
-          "author": "rick@hater.com"
-        }
-      ]
-    }
-  ];
 })();

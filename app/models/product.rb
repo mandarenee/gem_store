@@ -1,4 +1,6 @@
 class Product < ActiveRecord::Base
-  scope :gem, -> { where('category IS NOT NULL')}
+  belongs_to :category
   validates :name, presence: true
+
+  # include_root_in_json = false
 end
