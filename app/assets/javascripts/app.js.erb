@@ -14,7 +14,7 @@
     $scope.index = function() {
       $http.get('/api/products')
         .success(function(data){
-          $scope.products = (data['products']);
+          $scope.products = (data);
         })
         .error(function(data, status) {
           console.log(status);
@@ -30,11 +30,26 @@
         });
     };
 
-    // $scope.delete = function(:id) {
-    //   product_id = $scope.products[:id];
-    //   console.log($scope.product);
-    //   $http.delete('products/' + product_id)
-    // };
+    $scope.delete = function(product) {
+      $http.delete('/api/products/' + product.id)
+        .success(function() {
+          var index = $scope.products.indexOf(product);
+          $scope.products.splice(index, 1);
+        })
+        .error(function(data, status) {
+            console.log(status);
+            $scope.errors.push(status);
+        });
+    };
+
+
+
+    $scope.edit = function(product) {
+      $http.put('/api/products/' + product.id, product)
+        .success(function(data){
+          $scope.product = product;
+        });
+    }
   }]);
 
   app.controller("ReviewController", function() {

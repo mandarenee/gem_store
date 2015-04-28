@@ -21,10 +21,23 @@ module Api
       end
     end
 
+    def update
+      product = Product.find(params[:id])
+      if product.update(product_params)
+        render json: product, status: 200
+      else
+        render json: product.errors, status: 422
+      end
+    end
+
     def destroy
       product = Product.find(params[:id])
       product.destroy!
       render nothing: true, status: 204
+    end
+
+    def default_serializer_options
+      {root: false}
     end
 
     private

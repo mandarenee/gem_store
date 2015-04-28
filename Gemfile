@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
+# ruby '2.2.0'
 
 gem 'rails', '4.2.0'
 gem 'sass-rails', '~> 5.0'
@@ -18,7 +18,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'ngannotate-rails'
 
 # gem 'angular-rails-templates'
-gem 'bower-rails'
+gem 'bower-rails', '0.9.2'
 gem 'responders', '~> 2.0'
 gem 'active_model_serializers'
 

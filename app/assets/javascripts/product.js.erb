@@ -8,6 +8,24 @@
     };
   });
 
+  app.directive('newProduct', function(){
+    return {
+      restrict: 'A',
+      templateUrl: "<%= asset_path 'templates/new-product.html' %>",
+    };
+  });
+
+  app.directive('editProduct', function(){
+  return {
+    restrict: 'A',
+    templateUrl: "<%= asset_path 'templates/edit-product.html' %>",
+  //   controller:function($scope){
+  //     $scope.class.edit = true;
+  //   }
+  //   controllerAs: 'edits'
+    };
+  });
+
   app.directive('productPanels', function() {
     return {
       restrict: 'E',

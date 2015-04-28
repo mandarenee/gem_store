@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ListingProductsTest < ActionDispatch::IntegrationTest
   setup do
-    @gem = Category.create!(name: 'Gem')
-
-    @gem.products.create!(name: 'Pentegonal Gem', price: 345, description: "Shiny with five sides")
-    @gem.products.create!(name: 'Diamond Ring', price: 1235, description: "Princess cut")
+    Product.create(name: 'Pentegonal Gem', price: 345, description: "Shiny with five sides")
+    Product.create(name: 'Diamond Ring', price: 1235, description: "Princess cut")
   end
 
   test "listing products" do
+    Product.create(name: 'Pentegonal Gem', price: 345, description: "Shiny with five sides")
+    Product.create(name: 'Diamond Ring', price: 1235, description: "Princess cut")
     get '/api/products'
 
     assert_equal 200, response.status
@@ -17,7 +17,6 @@ class ListingProductsTest < ActionDispatch::IntegrationTest
     products = json(response.body)[:products]
     assert_equal Product.count, products.size
     product = Product.find(products.first[:id])
-    assert_equal @gem.id, product.category.id
   end
 
   test 'lists most expensive products' do
