@@ -2,15 +2,15 @@ require 'test_helper'
 
 class CreatingProductsTest < ActionDispatch::IntegrationTest
   test "creates new products" do
-    post '/api/products',  {product: {
-      name: 'Emerald',
-      price: 345,
-      description: 'super green',
-      canPurchase: true,
-      soldOut: false
-      } }.to_json,
-      { 'Accept' => 'application/json',
-        'Content-Type' => 'application/json' }
+    post '/api/products',  {
+      product: {
+        name: 'Emerald',
+        price: 345,
+        description: 'super green',
+        canPurchase: true,
+        soldOut: false
+      }
+    }.to_json, 'Content-Type' => 'application/json'
 
     assert_equal 201, response.status
     assert_equal Mime::JSON, response.content_type
