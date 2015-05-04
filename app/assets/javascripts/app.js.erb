@@ -42,8 +42,6 @@
         });
     };
 
-
-
     $scope.edit = function(product) {
       $http.put('/api/products/' + product.id, product)
         .success(function(data){

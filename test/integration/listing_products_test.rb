@@ -7,15 +7,9 @@ class ListingProductsTest < ActionDispatch::IntegrationTest
   end
 
   test "listing products" do
-    # binding.pry
     get('/api/products')
 
     assert_equal 200, response.status
-    # assert_equal Mime::JSON, response.content_type
-
-    # products = json(response.body)[:products]
-    # assert_equal Product.count, products.size
-    # product = Product.find(products.first[:id])
   end
 
   test 'lists most expensive products' do
